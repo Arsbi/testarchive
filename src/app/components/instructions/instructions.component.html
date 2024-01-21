@@ -1,0 +1,21 @@
+<div class="instructions_parent">
+    <div class="instructions_menubar">
+        <i (click)="displayMenu = true" class="pi pi-bars" style="cursor: pointer;"></i>
+        <span>تقویم</span>
+    </div>
+    
+    <pdf-viewer [src]="pdfSrc"
+                [render-text]="true"
+                [original-size]="false"
+                [autoresize]="true">
+    </pdf-viewer>
+</div>
+
+<p-sidebar [(visible)]="displayMenu">
+    <div routerLink="/" class="menuItems">
+        <span>Calendar</span>
+    </div>
+    <div routerLink="/instructions" class="menuItems">
+        <span>Instructions</span>
+    </div>
+</p-sidebar>

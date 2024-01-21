@@ -1,0 +1,587 @@
+<div class="calendar_parent">
+    <div class="calendar_menubar">
+        <i (click)="displayMenu = true" class="pi pi-bars" style="cursor: pointer;"></i>
+        <span>تقویم</span>
+    </div>
+
+    <div [ngStyle]="{ 'background-color': backgroundColor }" class="calendar_header">
+        <span>HEDSCHRA KALENDER</span>
+        <span>1443</span>
+        <span>ھجری تقویم</span>
+    </div>
+
+    <hr [ngStyle]="{ 'background-color': backgroundColor }"  class="headerLine">
+    <div class="arrows">
+        <button (click)="previous()" type="button" class="btn arrow">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        <button (click)="nextD()" type="button" class="btn arrow">
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+
+
+    <div class="calendar_table">
+        <div class="table_city">
+            <div [ngStyle]="{'height.px': 202, 'position': 'relative'}">
+                <div class="content">
+                    <span>GREGOR.</span>
+                    <span>2021</span>
+                </div>
+                <span [ngStyle]="{'position': 'absolute', 'bottom': '0'}">STADTE</span>
+              </div>
+            <hr>
+            <h6 class="zoom-effect-left" [ngStyle]="i % 2 === 0 ? {'background-color': backgroundlight} : {}" (click)="showDialogBox(city)" *ngFor="let city of cities; let i = index">{{city}}</h6>
+            <hr style="margin-top: 0px;">
+        </div>
+        <div  class="table_time">
+            <div [ngStyle]="{'height.px': calculatedHeight}">
+
+                <div class="single_box">
+                    <div class="white_box">
+                        <div *ngIf="data.length > 0">
+                            <span>{{data[0].gDate}}</span>
+                            <h6>{{data[0].gMonth}}</h6>
+                            <h6>{{data[0].gDay}}</h6>
+                        </div>
+                    </div>
+                    <div [ngStyle]="{ 'background-color': backgroundColor }"  class="green_box">
+                        <div *ngIf="data.length > 0">
+                            <span>{{data[0].hDate}}</span>
+                            <h6>{{data[0].hMonth}}</h6>
+                            <h6>{{data[0].gDay}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="table_prayer">
+                    <div class="single_prayer">
+                        <span>امساک</span>
+                        <span>Imsak</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>شمس</span>
+                        <span>Schams</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>ظھر</span>
+                        <span>Dhuhr</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>عصر</span>
+                        <span>Asr</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>مغرب</span>
+                        <span>Maghreb</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>عشاء</span>
+                        <span>Ischa</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+            <div *ngIf="data.length > 1">
+                <div  [ngStyle]="i % 2 === 0 ? {'background-color': backgroundlight} : {}" class="single_time" *ngFor="let index of data[1].cities;let i=index;">
+                    <h6>{{data[0]?.ismak[i]}}</h6>
+                    <h6>{{data[0]?.schams[i]}}</h6>
+                    <h6>{{data[0]?.dhuhr[i]}}</h6>
+                    <h6>{{data[0]?.asr[i]}}</h6>
+                    <h6>{{data[0]?.maghreb[i]}}</h6>
+                    <h6>{{data[0]?.ischa[i]}}</h6>
+                </div>
+            </div>
+
+            <hr style="margin-top: 0px;">
+            <!-- <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of data[0].times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of data[0].times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of data[0].times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of data[0].times">{{time}}</h6>
+            </div> -->
+        </div>
+        <div class="table_time">
+            <div [ngStyle]="{'height.px': calculatedHeight}">
+                <div class="single_box">
+                    <div class="white_box">
+                        <div *ngIf="data.length > 1">
+                            <span>{{data[1].gDate}}</span>
+                            <h6>{{data[1].gMonth}}</h6>
+                            <h6>{{data[1].gDay}}</h6>
+                        </div>
+                    </div>
+                    <div [ngStyle]="{ 'background-color': backgroundColor }" class="green_box">
+                        <div *ngIf="data.length > 1">
+                            <span>{{data[1].hDate}}</span>
+                            <h6>{{data[1].hMonth}}</h6>
+                            <h6>{{data[1].gDay}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="table_prayer">
+                    <div class="single_prayer">
+                        <span>امساک</span>
+                        <span>Imsak</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>شمس</span>
+                        <span>Schams</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>ظھر</span>
+                        <span>Dhuhr</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>عصر</span>
+                        <span>Asr</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>مغرب</span>
+                        <span>Maghreb</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>عشاء</span>
+                        <span>Ischa</span>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <div *ngIf="data.length > 1">
+                <div [ngStyle]="i % 2 === 0 ? {'background-color': backgroundlight} : {}" class="single_time" *ngFor="let index of data[0].cities;let i=index;">
+                    <h6>{{data[1]?.ismak[i]}}</h6>
+                    <h6>{{data[1]?.schams[i]}}</h6>
+                    <h6>{{data[1]?.dhuhr[i]}}</h6>
+                    <h6>{{data[1]?.asr[i]}}</h6>
+                    <h6>{{data[1]?.maghreb[i]}}</h6>
+                    <h6>{{data[1]?.ischa[i]}}</h6>
+                </div>
+            </div>
+            <hr style="margin-top: 0px;">
+            <!-- <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div> -->
+        </div>
+        <div class="table_time">
+            <div [ngStyle]="{'height.px': calculatedHeight}">
+                <div class="single_box">
+                    <div class="white_box">
+                        <div *ngIf="data.length > 2">
+                            <span>{{data[2].gDate}}</span>
+                            <h6>{{data[2].gMonth}}</h6>
+                            <h6>{{data[2].gDay}}</h6>
+                        </div>
+                    </div>
+                    <div [ngStyle]="{ 'background-color': backgroundColor }"  class="green_box">
+                        <div *ngIf="data.length > 2">
+                            <span>{{data[2].hDate}}</span>
+                            <h6>{{data[2].hMonth}}</h6>
+                            <h6>{{data[2].gDay}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="table_prayer">
+                    <div class="single_prayer">
+                        <span>امساک</span>
+                        <span>Imsak</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>شمس</span>
+                        <span>Schams</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>ظھر</span>
+                        <span>Dhuhr</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>عصر</span>
+                        <span>Asr</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>مغرب</span>
+                        <span>Maghreb</span>
+                    </div>
+                    <div class="single_prayer">
+                        <span>عشاء</span>
+                        <span>Ischa</span>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <div *ngIf="data.length > 2">
+                <div [ngStyle]="i % 2 === 0 ? {'background-color': backgroundlight} : {}" class="single_time" *ngFor="let index of data[2].cities;let i=index;">
+                    <h6>{{data[2]?.ismak[i]}}</h6>
+                    <h6>{{data[2]?.schams[i]}}</h6>
+                    <h6>{{data[2]?.dhuhr[i]}}</h6>
+                    <h6>{{data[2]?.asr[i]}}</h6>
+                    <h6>{{data[2]?.maghreb[i]}}</h6>
+                    <h6>{{data[2]?.ischa[i]}}</h6>
+                </div>
+            </div>
+            <hr style="margin-top: 0px;">
+            <!-- <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="single_time" *ngFor="let index of indexes">
+                <h6 *ngFor="let time of times">{{time}}</h6>
+            </div> -->
+        </div>
+        <div class="table_city">
+            <div [ngStyle]="{'height.px': 202, 'position': 'relative'}">
+                <div class="content">
+                    <span>HEDSCHRA</span>
+                <span>1443</span>
+                </div>
+                <span [ngStyle]="{'position': 'absolute', 'bottom': '0'}">STADTE</span>
+              </div>
+            <hr>
+            <h6 class="zoom-effect-right" [ngStyle]="i % 2 === 0 ? {'background-color': backgroundlight} : {}" (click)="showDialogBox(city)" *ngFor="let city of cities; let i = index">{{city}}</h6>
+            <hr style="margin-top: 0px;">
+            <!-- <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+            <hr style="margin-top: 0px;">
+            <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+            <hr style="margin-top: 0px;">
+            <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+            <hr style="margin-top: 0px;">
+            <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6> -->
+        </div>
+    </div>
+
+    <div class="calendar_tableMobile">
+        <div class="table_dateMobile">
+            <div class="single_box">
+                <div class="white_box">
+                    <span>23</span>
+                    <h6>September</h6>
+                    <h6>Donnerstag</h6>
+                </div>
+                <div class="green_box">
+                    <span>١٦</span>
+                    <h6>صفر</h6>
+                    <h6>الخميس</h6>
+                </div>
+            </div>
+        </div>
+        <div class="table_cityMobile">
+            <div class="table_prayerMobile">
+                <span>STADTE</span>
+                <div class="single_prayer">
+                    <span>امساک</span>
+                    <span>Imsak</span>
+                </div>
+                <div class="single_prayer">
+                    <span>شمس</span>
+                    <span>Schams</span>
+                </div>
+                <div class="single_prayer">
+                    <span>ظھر</span>
+                    <span>Dhuhr</span>
+                </div>
+                <div class="single_prayer">
+                    <span>عصر</span>
+                    <span>Asr</span>
+                </div>
+                <div class="single_prayer">
+                    <span>مغرب</span>
+                    <span>Maghreb</span>
+                </div>
+                <div class="single_prayer">
+                    <span>عشاء</span>
+                    <span>Ischa</span>
+                </div>
+            </div>
+            <hr style="margin-top: 0.9vh;">
+            <div class="table_prayerMobile">
+                <div class="single_time">
+                    <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+                </div>
+                <div class="single_time" *ngFor="let index of indexes">
+                    <h6 *ngFor="let time of times">{{time}}</h6>
+                </div>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="table_prayerMobile">
+                <div class="single_time">
+                    <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+                </div>
+                <div class="single_time" *ngFor="let index of indexes">
+                    <h6 *ngFor="let time of times">{{time}}</h6>
+                </div>
+            </div>
+            <hr style="margin-top: 0.05vh;">
+            <div class="table_prayerMobile">
+                <div class="single_time">
+                    <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+                </div>
+                <div class="single_time" *ngFor="let index of indexes">
+                    <h6 *ngFor="let time of times">{{time}}</h6>
+                </div>
+            </div>
+            <hr style="margin-top: -0.05vh;">
+            <div class="table_prayerMobile">
+                <div class="single_time">
+                    <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+                </div>
+                <div class="single_time" *ngFor="let index of indexes">
+                    <h6 *ngFor="let time of times">{{time}}</h6>
+                </div>
+            </div>
+            <hr style="margin-top: 0px;">
+            <div class="table_prayerMobile">
+                <div class="single_time">
+                    <h6 (click)="showDialogBox(city)" *ngFor="let city of cities">{{city}}</h6>
+                </div>
+                <div class="single_time" *ngFor="let index of indexes">
+                    <h6 *ngFor="let time of times">{{time}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr [ngStyle]="{ 'background-color': backgroundColor }"  class="tableLine">
+
+    <div [ngStyle]="{ 'background-color': backgroundColor }"   class="calendar_quote">
+        <h3>" Die Wissenschaft ist nicht dass, was man auswending gelernt hat, <br>
+            sondern dass, was im Leben daraus gemacht wird." - Iman Schafii</h3>
+    </div>
+
+    <hr [ngStyle]="{ 'background-color': backgroundColor }"   class="qouteLine">
+
+    <div *ngIf="contentData.length > 1" class='calendar_footer'>
+        <span (click)="showContentDialogBox()" style="cursor: pointer;">
+            {{contentData[1].leftText}}
+            <br><br>
+            
+        </span>
+        <span class='middleText' (click)="showContentDialogBox()" style="cursor: pointer;">
+            <img src={{image[0]}} style='margin-bottom: 2.5vh;'>
+            <br>
+            {{contentData[1].middleText}}
+            <br><br>
+        </span>
+        <span (click)="showContentDialogBox()" style="cursor: pointer;">
+            {{contentData[1].rightText}}
+        </span>
+    </div>
+
+    <div [ngStyle]="{ 'background-color': backgroundColor }" class="calendar_bottomBar">
+        <span>OHNE DEN ISLAM IST DIE GESELLSCHAFT ZUM UNTERGANG VERDAMMT</span>
+    </div>
+    <hr [ngStyle]="{ 'background-color': backgroundColor }" class="footerLine">
+</div>
+
+<p-dialog header="Read Content" [(visible)]="displayContentModal" [modal]="true" [draggable]="false">
+    <div class='modal_footer'>
+        <span (click)="showContentDialogBox()" style="cursor: pointer;">
+            {{leftText[contentIndex]}}
+            <br><br>
+            {{leftBelowText[contentIndex]}}
+            <br><br>
+        </span>
+        <span class='middleText' (click)="showContentDialogBox()" style="cursor: pointer;">
+            <img src={{image[contentIndex]}} style='margin-bottom: 2.5vh;'>
+            <br>
+            {{middleText[contentIndex]}}
+            <br><br>
+        </span>
+        <span (click)="showContentDialogBox()" style="cursor: pointer;">
+            {{rightText[contentIndex]}}
+        </span>
+    </div>
+    <div class="modal_footer_button">
+        <button [ngStyle]="{ 'background-color': backgroundColor }"  class="btn" (click)="prevContent()">Back</button>
+        <button [ngStyle]="{ 'background-color': backgroundColor }"  class="btn" (click)="nextContent()">Next</button>
+    </div>
+</p-dialog>
+
+<p-dialog header="{{city}}" [(visible)]="displayModal" [modal]="true" [draggable]="false">
+    <div *ngIf="data.length > 1" class="modal_date">
+        <div class="modal_dateBox">{{data[0].gDate + ' ' + data[0].gMonth}}</div>
+        <div [ngStyle]="{ 'background-color': backgroundColor }" class="modal_dateBoxArabic">{{ data[0].hMonth + ' ' + data[0].hDate }}</div>
+    </div>
+    <div class="modal_time">
+        <div class="modal_prayer">
+            <div class="single_prayer">
+                <span>امساک</span>
+                <span>Imsak</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[0]?.ismak[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>شمس</span>
+                <span>Schams</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh; padding: 5px 15px; border-radius: 8px;">{{data[0]?.schams[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>ظھر</span>
+                <span>Dhuhr</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[0]?.dhuhr[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>عصر</span>
+                <span>Asr</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[0]?.asr[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>مغرب</span>
+                <span>Maghreb</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[0]?.maghreb[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>عشاء</span>
+                <span>Ischa</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[0]?.ischa[myIndex]}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="data.length > 1" class="modal_date" style="margin-top: 5vh;">
+        <div class="modal_dateBox">{{data[1].gDate + ' ' + data[1].gMonth}}</div>
+        <div [ngStyle]="{ 'background-color': backgroundColor }" class="modal_dateBoxArabic">{{ data[1].hMonth + ' ' + data[1].hDate }}</div>
+    </div>
+    <div class="modal_time">
+        <div class="modal_prayer">
+            <div class="single_prayer">
+                <span>امساک</span>
+                <span>Imsak</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[1]?.ismak[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>شمس</span>
+                <span>Schams</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[1]?.schams[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>ظھر</span>
+                <span>Dhuhr</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[1]?.dhuhr[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>عصر</span>
+                <span>Asr</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[1]?.asr[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>مغرب</span>
+                <span>Maghreb</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[1]?.maghreb[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>عشاء</span>
+                <span>Ischa</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[1]?.ischa[myIndex]}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="data.length > 1" class="modal_date" style="margin-top: 5vh;">
+        <div class="modal_dateBox">{{data[2].gDate + ' ' + data[2].gMonth}}</div>
+        <div [ngStyle]="{ 'background-color': backgroundColor }" class="modal_dateBoxArabic">{{ data[2].hMonth + ' ' + data[2].hDate }}</div>
+    </div>
+    <div class="modal_time">
+        <div class="modal_prayer">
+            <div class="single_prayer">
+                <span>امساک</span>
+                <span>Imsak</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[2]?.ismak[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>شمس</span>
+                <span>Schams</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[2]?.schams[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>ظھر</span>
+                <span>Dhuhr</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[2]?.dhuhr[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>عصر</span>
+                <span>Asr</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[2]?.asr[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>مغرب</span>
+                <span>Maghreb</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[2]?.maghreb[myIndex]}}</span>
+            </div>
+            <div class="single_prayer">
+                <span>عشاء</span>
+                <span>Ischa</span>
+                <span [ngStyle]="{ 'background-color': backgroundlight }"
+                    style="margin-top: 2vh;  padding: 5px 15px; border-radius: 8px;">{{data[2]?.ischa[myIndex]}}</span>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+<p-sidebar [ngStyle]="{ 'background-color': backgroundColor }" [(visible)]="displayMenu">
+    <div routerLink="/" class="menuItems">
+        <span>Calendar</span>
+    </div>
+    <div routerLink="/instructions" class="menuItems">
+        <span>Instructions</span>
+    </div>
+    <div  (click)="toggleColors('#8B0000' , '#ffcccc')" class="menuItems">
+        <span>Color : Red</span>
+    </div>
+    <div (click)="toggleColors('#00008B' , '#cce5ff')" class="menuItems">
+        <span>Color : Blue</span>
+    </div>
+    <div  (click)="toggleColors('#B8860B' , '#fff9cc')" class="menuItems">
+        <span>Color : Yellow</span>
+    </div>
+    <div  (click)="toggleColors('#043602' , '#ddf0dd')" class="menuItems">
+        <span>Color : Default</span>
+    </div>
+    
+</p-sidebar>

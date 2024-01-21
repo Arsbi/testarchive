@@ -1,0 +1,44 @@
+.instructions_parent {
+
+    .instructions_menubar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e9e9e9;
+        padding: 1.5vh 7vh;
+        margin-bottom: 5vh;
+
+        span {
+            font-size: 25px;
+        }
+    }
+}
+
+.menuItems {
+    margin-top: 3vh;
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 6px;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #ddf0dd;
+    }
+
+    span {
+        color: #043602;
+        font-size: 20px;
+    }     
+}
+
+:host ::ng-deep .p-sidebar {
+    background-color: #043602;
+}
+
+:host ::ng-deep .p-sidebar .p-sidebar-content {
+    padding: 0px;
+}
